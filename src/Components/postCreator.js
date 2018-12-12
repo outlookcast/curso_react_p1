@@ -14,7 +14,7 @@ class PostCreator extends Component{
             text: "Post criado pelo postCreator",
             post: this.state.text,
             time: new Date().getTime(),
-            initialLiker: 0
+            initialLikes: 0
         }
         this.props.onCreate(newPost);
         console.log("newPost ==> ", newPost)
