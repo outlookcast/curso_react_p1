@@ -3,7 +3,7 @@ import "../post.css";
 
 class Post extends Component {
 
-    
+
     constructor(props) {
         super(props);
         this.state = {
@@ -11,10 +11,30 @@ class Post extends Component {
         };
     }
 
+    setLike() {
+        this.setState({ likes: this.state.likes + 1 }, () => {
+            console.log("Likes: ", this.state.likes)
+            this.savingInStorageWithPost();
+        })
+    }
+
+    savingInStorageWithPost() {
+        const posts = JSON.parse(localStorage.getItem('posts'));
+        const updatePosts = posts.map(savedPost => {
+            if (savedPost.time === this.props.time) {
+                savedPost.initialLikes = this.state.likes;
+            }
+            return savedPost;
+        });
+        localStorage.setItem('posts', JSON.stringify(updatePosts));
+    }
+
     render() {
         return (
             <div className={"post"}>
-                <h3>{this.props.text}</h3>
+                <h3 onClick={()=> {
+                    this.props.onNavigate();
+                }}>{this.props.text}</h3>
                 <small>{this.props.time}</small>
                 <p>Post: {this.props.post}</p>
                 <div style={likeLike}>
@@ -29,9 +49,7 @@ class Post extends Component {
                             fontWeight: 'bolder'
                         }
                     } onClick={() => {
-                        this.setState({ likes: this.state.likes + 1 }, () => {
-                            console.log("Likes: ", this.state.likes)
-                        })
+                        this.setLike();
                     }
                     }>Like</button>
                 </div>

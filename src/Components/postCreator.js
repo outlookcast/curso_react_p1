@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 
-class PostCreator extends Component{
+class PostCreator extends Component {
 
-    constructor(){
+    constructor() {
         super();
         this.state = {
             text: '',
         }
     }
 
-    createPost(){
+    createPost() {
         const newPost = {
             text: "Post criado pelo postCreator",
             post: this.state.text,
@@ -20,21 +20,21 @@ class PostCreator extends Component{
         console.log("newPost ==> ", newPost)
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <h3>Novo Post</h3>
                 <input style={{
                     width: "100%",
                     padding: '15'
-                }} value={this.state.text} onChange={(event)=>{
+                }} value={this.state.text} onChange={(event) => {
                     this.setState({
                         text: event.target.value
-                    }, ()=> {
+                    }, () => {
                         console.log('text ==> ', this.state.text)
                     })
-                }}/>
-                <button onClick={()=> {
+                }} />
+                <button onClick={() => {
                     this.createPost();
                 }}>Postar</button>
             </div>

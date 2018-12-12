@@ -1,64 +1,44 @@
 import React, { Component } from 'react';
-import Post from "./Components/post";
-import PostCreator from "./Components/postCreator";
-
-const postArray = [
-  {
-    text: "Texto do primeiro post",
-    time: "13:00",
-    post: "POST 1",
-    initialLikes: 4
-  },
-  {
-    text: "Texto do seugundo post",
-    time: "14:00",
-    post: "POST 2",
-    initialLikes: 6
-  },
-  {
-    text: "Texto do terceiro post",
-    time: "15:00",
-    post: "POST 3",
-    initialLikes: 8
-  },
-  {
-    text: "Texto do quarto post",
-    time: "16:00",
-    post: "POST 4",
-    initialLikes: 2
-  }
-];
-
-
+import { Switch, Route, BrowserRouter } from "react-router-dom";
+import TimeLine from "./Components/timeline";
+import PostDetails from "./Components/postDetails";
 
 class App extends Component {
 
-  constructor(){
-    super();
-    this.state = {
-      postArray: postArray
-    };
-  }
+    showNotFound() {
+        return (
+            <div>
+                <p style={{
+                    textAlign: "center"
+                }}> Pagina nao encontrada!</p>
+            </div>
+        );
+    }
 
-  insertPost(newPost){
-    const myPosts = this.state.postArray;
-    myPosts.unshift(newPost);
-    this.setState({postArray: myPosts});
-  }
+    shouAboutPage() {
+        return (
+            <div>
+                <p style={{
+                    textAlign: "center"
+                }}> Sou uma pagina feita em React!</p>
+            </div>
+        );
+    }
 
-  render() {
-    return (
-      <div>
-        <h1>Minha rede social!</h1>
-        <PostCreator onCreate={this.insertPost.bind(this)}/>
-        {this.state.postArray.map(post => {
-          return (
-            <Post text={post.text} time={post.time} key={post.text} initialLikes={post.initialLikes} post={post.post}></Post>
-          )
-        })}
-      </div>
-    )
-  }
-}
-
+    render() {
+        return (
+            <div>
+                <BrowserRouter>
+                    <Switch>
+                        <Route path="/post/:time" component={PostDetails} />
+                        <Route exact path="/" component={TimeLine} />
+                        <Route exact path="/sobre" component={this.shouAboutPage} />
+                        <Route path="*" component={this.showNotFound} />
+                    </Switch>
+                </BrowserRouter>
+            </div>
+                )
+            }
+        }
+        
 export default App;
