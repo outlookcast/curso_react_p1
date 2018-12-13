@@ -39,22 +39,18 @@ class TimeLine extends Component {
     }
   }
 
-  onNavigate(post){
-    this.props.history.push("/post/"+post.time)
+  onNavigate(post) {
+    this.props.history.push("/post/" + post.time)
   }
 
 
   render() {
     return (
       <div>
-        <h1>Minha rede social!</h1>
-        <button onClick={()=>{
-          this.props.history.push("/sobre");
-        }}> Ver sobre</button>
         <PostCreator onCreate={this.insertPost.bind(this)} />
         {this.state.postArray.map((post, i) => {
           return (
-            <Post text={post.text} time={post.time} key={post.time} initialLikes={post.initialLikes} post={post.post} onNavigate={()=> this.onNavigate(post)}></Post>
+            <Post text={post.text} time={post.time} key={post.time} initialLikes={post.initialLikes} post={post.post} onNavigate={() => this.onNavigate(post)} showViewPost={true}></Post>
           )
         })}
       </div>

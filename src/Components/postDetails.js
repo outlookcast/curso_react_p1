@@ -11,6 +11,7 @@ class PostDetails extends Component {
 
     componentDidMount(){
         this.getFromLocalStorage();
+        console.log("props =>", this.props)
     }
 
     getFromLocalStorage() {
@@ -27,7 +28,7 @@ class PostDetails extends Component {
         } else {
             return (
                 <div>
-                    <Post text={this.state.post.text} time={this.state.post.time} key={this.state.post.time} initialLikes={this.state.post.initialLikes} post={this.state.post.post}/>
+                    <Post text={this.state.post.text} time={this.state.post.time} key={this.state.post.time} initialLikes={this.state.post.initialLikes} post={this.state.post.post} showViewPost={false}/>
                 </div>
             )
         }

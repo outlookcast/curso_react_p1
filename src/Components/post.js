@@ -1,8 +1,20 @@
 import React, { Component } from "react";
 import "../post.css";
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+
+export const buttomStyle = {
+    marginLeft: "10px",
+    marginBottom: "10px"
+};
 
 class Post extends Component {
 
+    componentDidMount() {
+        console.log("props =>", this.props)
+    }
 
     constructor(props) {
         super(props);
@@ -30,38 +42,62 @@ class Post extends Component {
     }
 
     render() {
-        return (
-            <div className={"post"}>
-                <h3 onClick={()=> {
-                    this.props.onNavigate();
-                }}>{this.props.text}</h3>
-                <small>{this.props.time}</small>
-                <p>Post: {this.props.post}</p>
-                <div style={likeLike}>
-                    <p>Likes: {this.state.likes}</p>
-                    <button style={
-                        {
-                            backgroundColor: 'blue',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '5px',
-                            padding: '5px',
-                            fontWeight: 'bolder'
-                        }
-                    } onClick={() => {
+        if (this.props.showViewPost) {
+            return (
+                <Card>
+                    <CardContent>
+                        <Typography variant="h5" component="h2">
+                            {this.props.text}
+                        </Typography>
+                        <Typography color="textSecondary">
+                            {this.props.time}
+                        </Typography>
+                        <Typography component="p">
+                            Post: {this.props.post}
+                        </Typography>
+                        <Typography color="textSecondary">
+                            Likes: {this.state.likes}
+                        </Typography>
+                    </CardContent>
+                    <Button variant="contained" color="primary" style={buttomStyle} onClick={() => {
+                        this.props.onNavigate();
+                    }}>
+                        View Post
+                    </Button>
+                    <Button variant="contained" color="secondary" onClick={() => {
                         this.setLike();
                     }
-                    }>Like</button>
-                </div>
-            </div>
-        );
+                    } style={buttomStyle}>Like</Button>
+                </Card>
+            );
+        }
+        else{
+            return (
+                <Card>
+                    <CardContent>
+                        <Typography variant="h5" component="h2">
+                            {this.props.text}
+                        </Typography>
+                        <Typography color="textSecondary">
+                            {this.props.time}
+                        </Typography>
+                        <Typography component="p">
+                            Post: {this.props.post}
+                        </Typography>
+                        <Typography color="textSecondary">
+                            Likes: {this.state.likes}
+                        </Typography>
+                    </CardContent>
+                    <Button variant="contained" color="secondary" onClick={() => {
+                        this.setLike();
+                    }
+                    } style={buttomStyle}>Like</Button>
+                </Card>
+            );
+        }
+
     }
 }
 
-const likeLike = {
-    display: "flex",
-    justifyContent: "space-around",
-    height: 40
-}
 
 export default Post;

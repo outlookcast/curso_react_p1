@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import TimeLine from "./Components/timeline";
 import PostDetails from "./Components/postDetails";
+import Header from "./Components/header";
 
 class App extends Component {
 
@@ -28,6 +29,7 @@ class App extends Component {
     render() {
         return (
             <div>
+                <Header/>
                 <BrowserRouter>
                     <Switch>
                         <Route path="/post/:time" component={PostDetails} />
@@ -37,8 +39,8 @@ class App extends Component {
                     </Switch>
                 </BrowserRouter>
             </div>
-                )
-            }
-        }
-        
+        )
+    }
+}
+
 export default App;
