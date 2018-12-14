@@ -32,7 +32,7 @@ class App extends Component {
                 <Header/>
                 <BrowserRouter>
                     <Switch>
-                        <Route path="/post/:time" component={PostDetails} />
+                        <Route path="/post/:id" component={PostDetails} />
                         <Route exact path="/" component={TimeLine} />
                         <Route exact path="/sobre" component={this.shouAboutPage} />
                         <Route path="*" component={this.showNotFound} />

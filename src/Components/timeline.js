@@ -40,7 +40,7 @@ class TimeLine extends Component {
   }
 
   onNavigate(post) {
-    this.props.history.push("/post/" + post.time)
+    this.props.history.push("/post/" + post.id)
   }
 
 
@@ -48,9 +48,9 @@ class TimeLine extends Component {
     return (
       <div>
         <PostCreator onCreate={this.insertPost.bind(this)} />
-        {this.state.postArray.map((post, i) => {
+        {this.state.postArray.map((post) => {
           return (
-            <Post text={post.text} time={post.time} key={post.time} initialLikes={post.initialLikes} post={post.post} onNavigate={() => this.onNavigate(post)} showViewPost={true}></Post>
+            <Post text={post.text} time={post.time} key={post.id} initialLikes={post.initialLikes} post={post.post} onNavigate={() => this.onNavigate(post)} showViewPost={true} autor={post.autor} id={post.id}></Post>
           )
         })}
       </div>

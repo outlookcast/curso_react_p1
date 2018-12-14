@@ -7,6 +7,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 
+const moment = require('moment');
+const uuidv4 = require('uuid/v4');
 
 export const buttomStyle = {
     marginLeft: "10px",
@@ -19,22 +21,25 @@ class PostCreator extends Component {
         super();
         this.state = {
             text: "",
-            time: "",
+            autor: "",
             post: ""
         }
     }
 
     createPost() {
         const newPost = {
+            id: uuidv4(),
             text: this.state.text,
             post: this.state.post,
-            time: this.state.time,
+            time: moment().format("DD/MM/YYYY - HH:mm:ss"),
+            autor: this.state.autor,
             initialLikes: 0
         }
+        console.log("new post ==> ", newPost)
         this.setState(
             {
                 text: "",
-                time: "",
+                autor: "",
                 post: ""
             }
         )
@@ -56,10 +61,10 @@ class PostCreator extends Component {
                             }} />
                         </FormControl>
                         <FormControl>
-                            <InputLabel>Digite o horario</InputLabel>
-                            <Input id="time" value={this.state.time} onChange={(event) => {
+                            <InputLabel>Digite o Autor</InputLabel>
+                            <Input id="autor" value={this.state.autor} onChange={(event) => {
                                 this.setState({
-                                    time: event.target.value
+                                    autor: event.target.value
                                 })
                             }} />
                         </FormControl>

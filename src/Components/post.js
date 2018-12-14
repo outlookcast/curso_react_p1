@@ -33,7 +33,7 @@ class Post extends Component {
     savingInStorageWithPost() {
         const posts = JSON.parse(localStorage.getItem('posts'));
         const updatePosts = posts.map(savedPost => {
-            if (savedPost.time === this.props.time) {
+            if (savedPost.id === this.props.id) {
                 savedPost.initialLikes = this.state.likes;
             }
             return savedPost;
@@ -57,6 +57,9 @@ class Post extends Component {
                         </Typography>
                         <Typography color="textSecondary">
                             Likes: {this.state.likes}
+                        </Typography>
+                        <Typography color="textSecondary">
+                            Autor: {this.props.autor}
                         </Typography>
                     </CardContent>
                     <Button variant="contained" color="primary" style={buttomStyle} onClick={() => {
@@ -86,6 +89,9 @@ class Post extends Component {
                         </Typography>
                         <Typography color="textSecondary">
                             Likes: {this.state.likes}
+                        </Typography>
+                        <Typography color="textSecondary">
+                            Autor: {this.props.autor}
                         </Typography>
                     </CardContent>
                     <Button variant="contained" color="secondary" onClick={() => {
