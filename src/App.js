@@ -3,6 +3,7 @@ import { Switch, Route, BrowserRouter } from "react-router-dom";
 import TimeLine from "./Components/timeline";
 import PostDetails from "./Components/postDetails";
 import Header from "./Components/header";
+import UserCreate from "./Components/userCreate"
 
 class App extends Component {
 
@@ -34,6 +35,7 @@ class App extends Component {
                     <Switch>
                         <Route path="/post/:id" component={PostDetails} />
                         <Route exact path="/" component={TimeLine} />
+                        <Route exact path="/createUser" component={UserCreate} />
                         <Route exact path="/sobre" component={this.shouAboutPage} />
                         <Route path="*" component={this.showNotFound} />
                     </Switch>

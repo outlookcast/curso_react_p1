@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Post from "./post";
 import PostCreator from "./postCreator";
 
+
+
 class TimeLine extends Component {
 
   constructor() {
@@ -42,6 +44,7 @@ class TimeLine extends Component {
   onNavigate(post) {
     this.props.history.push("/post/" + post.id)
   }
+
 
 
   render() {

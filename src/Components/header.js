@@ -17,7 +17,8 @@ class Header extends Component {
                             <Typography variant="h6" color="inherit">
                             Minha rede social
                         </Typography>
-                            <Button color="inherit" href="/">Home</Button>
+                        <Button color="inherit" href="/">Home</Button>
+                        <Button color="inherit" href="/createUser">Criar Usuario</Button>
                         <Button color="inherit" href="/sobre">Sobre</Button>
                     </Toolbar>
                 </AppBar>

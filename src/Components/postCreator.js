@@ -15,6 +15,19 @@ export const buttomStyle = {
     marginBottom: "10px"
 };
 
+const users = [
+    {
+      id: "4bc99efa-c1e3-48a0-8c52-9ea17a62c242",
+      nome: "Vinicius",
+      foto: "../Assets/ft1.png"
+    },
+    {
+      id: "b829e6f4-1bdf-45d4-b9de-5723d991c5ec",
+      nome: "Isabela",
+      foto: "../Assets/ft1.png"
+    }
+  ]
+
 class PostCreator extends Component {
 
     constructor() {
@@ -50,8 +63,10 @@ class PostCreator extends Component {
     render() {
         return (
             <div>
+
                 <Card>
                     <CardContent>
+                        <h1>Criar post</h1>
                         <FormControl>
                             <InputLabel >Digite o titulo do post</InputLabel>
                             <Input id="title" value={this.state.text} onChange={(event) => {
@@ -68,6 +83,10 @@ class PostCreator extends Component {
                                 })
                             }} />
                         </FormControl>
+                        <h3>Selecione o Autor</h3>
+                        {users.map((element) => {
+                            return <div key={element.id}>{element.nome}</div>
+                        })}
                         <div>
                             <Grid container spacing={8} alignItems="flex-end">
                                 <FormControl>
