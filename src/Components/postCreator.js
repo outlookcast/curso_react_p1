@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import Radio from '@material-ui/core/Radio';
 
 const moment = require('moment');
 const uuidv4 = require('uuid/v4');
@@ -17,16 +21,16 @@ export const buttomStyle = {
 
 const users = [
     {
-      id: "4bc99efa-c1e3-48a0-8c52-9ea17a62c242",
-      nome: "Vinicius",
-      foto: "../Assets/ft1.png"
+        id: "4bc99efa-c1e3-48a0-8c52-9ea17a62c242",
+        nome: "Vinicius",
+        foto: "../Assets/ft1.png"
     },
     {
-      id: "b829e6f4-1bdf-45d4-b9de-5723d991c5ec",
-      nome: "Isabela",
-      foto: "../Assets/ft1.png"
+        id: "b829e6f4-1bdf-45d4-b9de-5723d991c5ec",
+        nome: "Isabela",
+        foto: "../Assets/ft1.png"
     }
-  ]
+]
 
 class PostCreator extends Component {
 
@@ -35,8 +39,15 @@ class PostCreator extends Component {
         this.state = {
             text: "",
             autor: "",
-            post: ""
+            post: "",
+            autores: null
         }
+    }
+
+    componentDidMount() {
+        this.setState({ autores: users }, () => {
+            console.log('this.sate from postCreator', this.state)
+        })
     }
 
     createPost() {
@@ -60,6 +71,20 @@ class PostCreator extends Component {
         console.log("newPost ==> ", newPost)
     }
 
+    selecionarAutor = event => {
+        this.setState({ autor: event.target.value }, () => {
+            console.log(this.state.autor)
+        });
+    };
+
+    formAutores() {
+        if (this.state.autores) {
+            return this.state.autores.map((element) => {
+                return (<FormControlLabel value={element.nome} control={<Radio color="primary" />} label={element.nome} labelPlacement="start" key={element.id} />)
+            })
+        }
+    }
+
     render() {
         return (
             <div>
@@ -75,18 +100,19 @@ class PostCreator extends Component {
                                 })
                             }} />
                         </FormControl>
-                        <FormControl>
-                            <InputLabel>Digite o Autor</InputLabel>
-                            <Input id="autor" value={this.state.autor} onChange={(event) => {
-                                this.setState({
-                                    autor: event.target.value
-                                })
-                            }} />
-                        </FormControl>
-                        <h3>Selecione o Autor</h3>
-                        {users.map((element) => {
-                            return <div key={element.id}>{element.nome}</div>
-                        })}
+                        <div style={{
+                            marginTop: "20px"
+                        }}>
+                            <Grid container spacing={8} alignItems="flex-end">
+                                <FormControl>
+                                    <FormLabel>Autor</FormLabel>
+                                    <RadioGroup value={this.state.autor} onChange={this.selecionarAutor}>
+                                        {this.formAutores()}
+                                    </RadioGroup>
+                                </FormControl>
+                            </Grid>
+                        </div>
+
                         <div>
                             <Grid container spacing={8} alignItems="flex-end">
                                 <FormControl>
